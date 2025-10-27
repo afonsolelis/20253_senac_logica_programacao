@@ -16,3 +16,7 @@ Apresenta o processo de programação e os fundamentos das linguagens de program
 
 - Desafios das Aulas: [Formulário de envio](https://docs.google.com/forms/d/e/1FAIpQLSfSnXmWPjsw5YICPSoR8elSV6i3OCVxV3czJldzHoKj0zaXNg/viewform?usp=dialog)
 - Projeto Final: [Formulário de envio](https://docs.google.com/forms/d/e/1FAIpQLSeFUbsZ9rS03GI9Z9dHosdqpAkvzY2UGtOM1IFjHWNEMZmTXg/viewform?usp=dialog)
+
+### Ambiente de Código
+
+- Ambiente principal: [Google Colab](https://colab.research.google.com/) — utilizaremos o Colab para executar os exemplos e exercícios em Python ao longo da disciplina.
