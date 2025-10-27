@@ -34,3 +34,11 @@ melhora engajamento e clareza dos objetivos
 
 Refs: #12
 ```
+
+## Dicas
+
+- Teste rápido com commit vazio (sem alterações), útil para validar mensagens no padrão:
+
+```bash
+git commit --allow-empty -m "chore: teste do agente de commits"
+```
