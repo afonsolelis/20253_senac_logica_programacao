@@ -1,0 +1,99 @@
+# Agente de Commit — Conventional Commits
+# Este agente ajuda a gerar mensagens de commit padronizadas (https://www.conventionalcommits.org/)
+
+version: 1
+name: "Conventional Commit Agent"
+id: conventional-commit-agent
+language: pt-BR
+
+about:
+  description: |
+    Gera mensagens de commit seguindo o padrão Conventional Commits.
+    Analise as mudanças (diff) e produza uma mensagem curta e objetiva,
+    com corpo explicando o "o quê" e "por quê". Inclua rodapé para
+    BREAKING CHANGE e referências a issues quando houver.
+  homepage: "https://www.conventionalcommits.org/pt-br/v1.0.0/"
+
+output:
+  format: plain  # apenas o texto da mensagem do commit
+  constraints:
+    - max_subject_length: 72
+    - wrap_body_at: 72
+
+conventional_commits:
+  types:
+    - feat
+    - fix
+    - docs
+    - style
+    - refactor
+    - perf
+    - test
+    - build
+    - ci
+    - chore
+    - revert
+  scope_guidelines: |
+    Use um escopo opcional em minúsculas com hífen quando útil, por exemplo:
+    feat(ui):, fix(api):, docs(readme):. O escopo deve ser curto e descritivo.
+  subject_guidelines: |
+    - Modo imperativo, em minúsculas, sem ponto final.
+    - Seja específico sobre a mudança visível ao usuário.
+  body_guidelines: |
+    - Explique a motivação (por quê) e o que mudou (o quê).
+    - Destaque implicações, riscos e alternativas consideradas quando relevante.
+  footer_guidelines: |
+    - BREAKING CHANGE: descreva o que mudou e como migrar.
+    - Refs: #123 #456 para vincular a issues.
+
+prompt:
+  system: |
+    Você é um assistente de engenharia que escreve mensagens de commit
+    seguindo "Conventional Commits" rigorosamente. Saída deve conter APENAS
+    a mensagem do commit, sem explicações adicionais.
+
+  user_template: |
+    Gere uma mensagem de commit no padrão Conventional Commits com base no diff abaixo.
+
+    Regras:
+    - Escolha um tipo entre: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert.
+    - (Opcional) Inclua escopo curto em minúsculas: tipo(escopo): assunto
+    - Assunto em modo imperativo, minúsculas, sem ponto final, até 72 chars.
+    - Corpo (opcional) com que/por quê/impacto, linhas até 72 colunas.
+    - Rodapé (opcional): BREAKING CHANGE: ... e/ou Refs: #ids
+
+    Diff:
+    ---
+    {{diff}}
+    ---
+
+examples:
+  - name: "feat: exemplo simples"
+    diff_summary: |
+      add: aulas/aula_20251027_revisao.md
+      change: conteúdo com 50 exercícios contextualizados
+    message: |
+      feat(aulas): adicionar exercícios contextualizados na aula de revisão
+
+      inclui 50 problemas reais distribuídos por temas com gabarito
+      melhora engajamento e clareza dos objetivos
+
+      Refs: #12
+  - name: "fix: exemplo com breaking change"
+    diff_summary: |
+      change: renomeia função alarme() para alarmar()
+    message: |
+      fix(alarme): corrigir nome de função para evitar colisão
+
+      renomeia alarme() para alarmar() e ajusta chamadas
+      melhora legibilidade e evita conflito com lib externa
+
+      BREAKING CHANGE: função alarme() foi renomeada para alarmar()
+      Refs: #34
+
+usage:
+  instructions: |
+    - Gere o diff das mudanças (staged ou working tree).
+    - Forneça o diff ao agente (variável {{diff}}) e obtenha a mensagem.
+    - Revise e ajuste escopo se necessário.
+    - Use a saída diretamente no git commit -m "..." ou no editor de commit.
