@@ -20,3 +20,4 @@ Apresenta o processo de programação e os fundamentos das linguagens de program
 ### Ambiente de Código
 
 - Ambiente principal: [Google Colab](https://colab.research.google.com/) — utilizaremos o Colab para executar os exemplos e exercícios em Python ao longo da disciplina.
+- As aulas (notebooks) e o projeto final devem ser desenvolvidos no Google Colab.
